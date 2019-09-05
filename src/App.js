@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter } from "react-router-dom";
+import Loadable from 'react-loadable';
+
+const Loading = () => '';
+
+const Index = Loadable({
+  loader: () => import('./pages/index/index'),
+  loading: Loading,
+});
+const Details = Loadable({
+  loader: () => import('./pages/details/details'),
+  loading: Loading,
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div>
+      <Route exact path="/" component={Index}/>
+      <Route path="/details/:id" component={Details}/>
     </div>
+  </BrowserRouter >
   );
 }
 
